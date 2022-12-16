@@ -1,0 +1,8 @@
+library(rpart)
+library(randomForest)
+install.packages("class")
+library(class)
+install.packages("e1071")
+library(e1071)
+install.packages("caret")
+library(caret)
