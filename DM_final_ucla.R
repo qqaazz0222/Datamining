@@ -6,3 +6,7 @@ install.packages("e1071")
 library(e1071)
 install.packages("caret")
 library(caret)
+
+ucla = read.csv('https://stats.idre.ucla.edu/stat/data/binary.csv')
+ucla$admit = factor(ucla$admit)
+str(ucla)
