@@ -20,3 +20,16 @@ ucla_training = ucla[trainingdata, ]
 ucla_test = ucla[testdata, ]
 nrow(ucla_training)
 nrow(ucla_test)
+
+# 결정트리
+rmodel = rpart(admit~., data = ucla_training)
+# 랜덤포레스트(50개)
+sforestmodel = randomForest(admit~., data = ucla_training, ntree = 50)
+# 랜덤포레스트(1000개)
+bforestmodel = randomForest(admit~., data = ucla_training, ntree = 1000)
+# K-NN
+knnmodel = knn(ucla_training, ucla_test, ucla_training$admit, k = 5)
+# SVM(radial basis)
+svmradialmodel = svm(admit~., data = ucla_training)
+# SVM(polynomial)
+svmpolymodel = svm(admit~., data = ucla_training, kernel = 'polynomial')
