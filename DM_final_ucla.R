@@ -33,3 +33,25 @@ knnmodel = knn(ucla_training, ucla_test, ucla_training$admit, k = 5)
 svmradialmodel = svm(admit~., data = ucla_training)
 # SVM(polynomial)
 svmpolymodel = svm(admit~., data = ucla_training, kernel = 'polynomial')
+
+# 테스트 데이터 예측
+# 결정트리 예측
+nd = data.frame(gre=ucla_test$gre, gpa=ucla_test$gpa, rank=ucla_test$rank)
+predict(rmodel, newdata = nd)
+rmodelresult = predict(rmodel, nd, type = 'class')
+confusionMatrix(rmodelresult, ucla_test$admit)
+# 랜덤포레스트(50) 예측
+sforestresult = predict(sforestmodel, newdata = ucla_test)
+table(sforestresult, ucla_test$admit)
+# 랜덤포레스트(1000) 예측
+bforestresult = predict(bforestmodel, newdata = ucla_test)
+table(bforestresult, ucla_test$admit)
+# K-NN 예측
+knnresult = knn(ucla_training, ucla_test, ucla_training$admit, k = 5)
+table(knnresult, ucla_test$admit)
+# SVM(radial basis) 에측
+svmradialresult = predict(svmradialmodel, newdata = ucla_test)
+table(svmradialresult, ucla_test$admit)
+# SVM(polynomial) 예측
+svmpolyresult = predict(svmpolymodel, newdata = ucla_test)
+table(svmpolyresult, ucla_test$admit)
